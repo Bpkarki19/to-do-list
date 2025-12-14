@@ -6,9 +6,10 @@ import Task from "./components/Task"
 import NewTaskForm from "./components/NewTaskForm"
 import Footer from "./components/Footer"
 import TaskList from "./components/TaskList"
+import TaskFilter from "./components/TaskFilter"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTask] = useState();
 
   return (
     <>
@@ -36,7 +37,9 @@ function App() {
           </TaskList>
           
 
-          <Footer n="1" />
+          <Footer n="1">
+            <TaskFilter/>
+          </Footer> 
         </section>
       </section>
     </>
