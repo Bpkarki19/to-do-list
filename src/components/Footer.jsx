@@ -1,10 +1,10 @@
-import { Children } from "react";
 
-export default function Footer({n,Children}) {
+
+export default function Footer({n,children}) {
   return (
     <footer className="footer">
       <span className="todo-count">{n} items left</span>
-      {Children}
+      {children}
       <button className="clear-completed">Clear completed</button>
     </footer>
   )
