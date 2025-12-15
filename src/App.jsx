@@ -7,28 +7,42 @@ import NewTaskForm from "./components/NewTaskForm"
 import Footer from "./components/Footer"
 import TaskList from "./components/TaskList"
 import TaskFilter from "./components/TaskFilter"
+import InputTask from "./components/InputTask"
 
 function App() {
-  const [tasks, setTask] = useState();
+  const [tasks, setTask] = useState([
+    {id:1, description:"Play football", status:"active",createdTime:"now"}
+  ]);
+  const addItem = (text) =>{
+    //key value pair standard js obj
+    const newTask = {
+      id: Date.now(),
+      description: text,
+      completed: false,
+      createdTime: 'just now'
+    };
+    //adding new task to existing array
+    setTask((prevTask)=>[...prevTask, newTask]);
+  };
 
   return (
     <>
       <section className="todoapp">
         <header class="header">
           <h1>todos</h1>
-          <input
-            class="new-todo"
-            placeholder="What needs to be done?"
-            autofocus
-          />
+          <InputTask onItemAdded={addItem}/>
         </header>
         <section className="main">
           <TaskList>
-            <Task
-              description="Completed task"
-              status="completed"
-              createdTime="created 17 seconds ago"
+            {tasks.map((task)=>(
+              <Task
+              key = {task.id}
+              description={task.description}
+              status={task.status}
+              createdTime={task.createdTime}
             />
+            ))}
+            
             <NewTaskForm/>
             <Task
             description="coding"
