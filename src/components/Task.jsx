@@ -1,23 +1,49 @@
-
+import { useState } from "react"
 
 function Task({ description, status, createdTime }) {
   const isCompleted = status === "completed"
+  const [text, setText] = useState(description)
+  const [isEditing, setIsEditing] = useState(false)
+
+  const edit = () => {
+    setIsEditing(true);
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      setIsEditing(false);
+      //callin backend part
+    }
+  }
 
   return (
-    <li className={isCompleted ? "completed" : ""}>
-      <div className="view">
+    <li className={`${isCompleted?"completed":""} ${isEditing?"editing":""}`}>
+        <div className="view">
+          <input
+            className="toggle"
+            type="checkbox"
+            defaultChecked = {isCompleted}
+            
+          />
+          <label>
+            <span className="description">{description}</span>
+            <span className="created">{createdTime}</span>
+          </label>
+          <button
+            type="button"
+            className="icon icon-edit"
+            onClick={edit}
+            aria-label="Edit"
+          ></button>
+          <button type="button" className="icon icon-destroy"></button>
+        </div>
         <input
-          className="toggle"
-          type="checkbox"
-          defaultChecked={isCompleted}
+          type="text"
+          className="edit"
+          value={text}
+          onChange={(e)=>setText(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
-        <label>
-          <span className="description">{description}</span>
-          <span className="created">{createdTime}</span>
-        </label>
-        <button className="icon icon-edit"></button>
-        <button className="icon icon-destroy"></button>
-      </div>
     </li>
   )
 }

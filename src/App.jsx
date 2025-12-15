@@ -3,7 +3,7 @@ import reactLogo from "./assets/react.svg"
 import viteLogo from "/vite.svg"
 import "./App.css"
 import Task from "./components/Task"
-import NewTaskForm from "./components/NewTaskForm"
+
 import Footer from "./components/Footer"
 import TaskList from "./components/TaskList"
 import TaskFilter from "./components/TaskFilter"
@@ -43,7 +43,7 @@ function App() {
             />
             ))}
             
-            <NewTaskForm/>
+            
             <Task
             description="coding"
             status={'not completed'}
