@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Task({ id,onDelete,onToggle, description, status, createdTime }) {
+function Task({ id,onDelete,onToggle,onEDit, description, status, createdTime }) {
   const isCompleted = status === "completed"
   const [text, setText] = useState(description)
   const [isEditing, setIsEditing] = useState(false)
@@ -29,7 +29,7 @@ function Task({ id,onDelete,onToggle, description, status, createdTime }) {
             onChange={()=>onToggle(id)}//call parent function click
           />
           <label>
-            <span className="description">{description}</span>
+            <span className="description">{text}</span>
             <span className="created">{createdTime}</span>
           </label>
           <button

@@ -10,6 +10,8 @@ import InputTask from "./components/InputTask"
 function App() {
   const [tasks, setTask] = useState([]);
 
+ 
+
   const toggleStatus = (id)=>{
     setTask(tasks.map((task)=>{
       if(task.id === id){
@@ -62,6 +64,7 @@ function App() {
               createdTime={task.createdTime}
               onDelete = {deleteTask}
               onToggle = {toggleStatus}
+              //onEdit={editTask}
 
             />
             ))}
