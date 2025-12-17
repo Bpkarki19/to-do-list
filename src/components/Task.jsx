@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Task({ id,onDelete, description, status, createdTime }) {
+function Task({ id,onDelete,onToggle, description, status, createdTime }) {
   const isCompleted = status === "completed"
   const [text, setText] = useState(description)
   const [isEditing, setIsEditing] = useState(false)
@@ -25,8 +25,8 @@ function Task({ id,onDelete, description, status, createdTime }) {
           <input
             className="toggle"
             type="checkbox"
-            defaultChecked = {isCompleted}
-            
+            checked = {isCompleted}
+            onChange={()=>onToggle(id)}//call parent function click
           />
           <label>
             <span className="description">{description}</span>

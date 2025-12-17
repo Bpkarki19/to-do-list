@@ -1,6 +1,4 @@
 import { useState } from "react"
-import reactLogo from "./assets/react.svg"
-import viteLogo from "/vite.svg"
 import "./App.css"
 import Task from "./components/Task"
 
@@ -10,9 +8,22 @@ import TaskFilter from "./components/TaskFilter"
 import InputTask from "./components/InputTask"
 
 function App() {
-  const [tasks, setTask] = useState([
-    {id:1, description:"Play football", status:"active",createdTime:"now"}
-  ]);
+  const [tasks, setTask] = useState([]);
+
+  const toggleStatus = (id)=>{
+    setTask(tasks.map((task)=>{
+      if(task.id === id){
+        return{
+          ...task,
+          status: task.status === "active"?"completed":"active"
+          
+
+        };
+      }
+      return task;
+    }));
+  };
+  
 
   const deleteTask = (idToDelete)=>{
     const newTask = tasks.filter((task)=> task.id !== idToDelete);
@@ -22,10 +33,12 @@ function App() {
   const addItem = (text) =>{
     //key value pair standard js obj
     const newTask = {
-      id: Date.now(),
+      //id: Date.now(),
+      id: crypto.randomUUID(),
       description: text,
       status: "active",
       createdTime: 'just now'
+
     };
     //adding new task to existing array
     setTask((prevTask)=>[...prevTask, newTask]);
@@ -48,6 +61,8 @@ function App() {
               status={task.status}
               createdTime={task.createdTime}
               onDelete = {deleteTask}
+              onToggle = {toggleStatus}
+
             />
             ))}
           </TaskList>

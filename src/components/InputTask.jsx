@@ -15,9 +15,9 @@ export default function InputTask({ onItemAdded }) {
   return (
    
       <input
-        class="new-todo"
+        className="new-todo"
         placeholder="What needs to be done?"
-        autofocus
+        autoFocus
         onChange={onLabelChange}
         onKeyDown={handleKetDown}
         value={text}
