@@ -13,12 +13,18 @@ function App() {
   const [tasks, setTask] = useState([
     {id:1, description:"Play football", status:"active",createdTime:"now"}
   ]);
+
+  const deleteTask = (idToDelete)=>{
+    const newTask = tasks.filter((task)=> task.id !== idToDelete);
+    setTask(newTask);
+
+  }
   const addItem = (text) =>{
     //key value pair standard js obj
     const newTask = {
       id: Date.now(),
       description: text,
-      completed: false,
+      status: "active",
       createdTime: 'just now'
     };
     //adding new task to existing array
@@ -28,7 +34,7 @@ function App() {
   return (
     <>
       <section className="todoapp">
-        <header class="header">
+        <header className="header">
           <h1>todos</h1>
           <InputTask onItemAdded={addItem}/>
         </header>
@@ -37,21 +43,17 @@ function App() {
             {tasks.map((task)=>(
               <Task
               key = {task.id}
+              id = {task.id}
               description={task.description}
               status={task.status}
               createdTime={task.createdTime}
+              onDelete = {deleteTask}
             />
             ))}
-            
-            
-            <Task
-            description="coding"
-            status={'not completed'}
-            createdTime={'1hr ago'}/>
           </TaskList>
           
 
-          <Footer n="1">
+          <Footer n={tasks.length}>
             <TaskFilter/>
           </Footer> 
         </section>

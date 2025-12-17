@@ -1,9 +1,10 @@
 import { useState } from "react"
 
-function Task({ description, status, createdTime }) {
+function Task({ id,onDelete, description, status, createdTime }) {
   const isCompleted = status === "completed"
   const [text, setText] = useState(description)
   const [isEditing, setIsEditing] = useState(false)
+  
 
   const edit = () => {
     setIsEditing(true);
@@ -15,6 +16,8 @@ function Task({ description, status, createdTime }) {
       //callin backend part
     }
   }
+
+  
 
   return (
     <li className={`${isCompleted?"completed":""} ${isEditing?"editing":""}`}>
@@ -35,7 +38,10 @@ function Task({ description, status, createdTime }) {
             onClick={edit}
             aria-label="Edit"
           ></button>
-          <button type="button" className="icon icon-destroy"></button>
+          <button type="button" 
+          className="icon icon-destroy" 
+          onClick={()=>onDelete(id)}
+          aria-label="Delete"></button>
         </div>
         <input
           type="text"
