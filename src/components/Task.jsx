@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Task({ id,onDelete,onToggle,onEDit, description, status, createdTime }) {
+function Task({ id,onDelete,onToggle,onEdit, description, status, createdTime }) {
   const isCompleted = status === "completed"
   const [text, setText] = useState(description)
   const [isEditing, setIsEditing] = useState(false)
@@ -12,6 +12,7 @@ function Task({ id,onDelete,onToggle,onEDit, description, status, createdTime })
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      onEdit(id,text);
       setIsEditing(false);
       //callin backend part
     }
@@ -29,7 +30,7 @@ function Task({ id,onDelete,onToggle,onEDit, description, status, createdTime })
             onChange={()=>onToggle(id)}//call parent function click
           />
           <label>
-            <span className="description">{text}</span>
+            <span className="description">{description}</span>
             <span className="created">{createdTime}</span>
           </label>
           <button
