@@ -9,6 +9,13 @@ import InputTask from "./components/InputTask"
 
 function App() {
   const [tasks, setTask] = useState([]);
+  const [filter, setFilter] = useState('all');
+
+  const filteredTask = tasks.filter((task)=>{
+    if(filter === "active") return task.status ==="active";
+    if(filter === "completed") return task.status === "completed"
+    return true;
+  });
 
   const editTask = (id, newDescription)=>{
     setTask(tasks.map((task)=>{
@@ -61,8 +68,9 @@ function App() {
           <InputTask onItemAdded={addItem}/>
         </header>
         <section className="main">
+
           <TaskList>
-            {tasks.map((task)=>(
+            {filteredTask.map((task)=>(
               <Task
               key = {task.id}
               id = {task.id}
@@ -79,7 +87,10 @@ function App() {
           
 
           <Footer n={tasks.length}>
-            <TaskFilter/>
+            <TaskFilter
+            currentFilter = {filter}
+            setFilter = {setFilter}
+            />
           </Footer> 
         </section>
       </section>

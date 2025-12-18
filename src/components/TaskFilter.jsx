@@ -1,14 +1,20 @@
-export default function TaskFilter(){
+export default function TaskFilter({currentFilter,setFilter}){
     return(
         <ul className="filters">
         <li>
-          <button className="selected">All</button>
+          <button className={currentFilter==="all"?"selected":""}
+          onClick={()=>setFilter("all")}
+          >All</button>
         </li>
         <li>
-          <button>Active</button>
+          <button className={currentFilter==="active"?"selected":""}
+          onClick={()=>setFilter("active")}
+          >Active</button>
         </li>
         <li>
-          <button>Completed</button>
+          <button className={currentFilter==="completed"?"selected":""}
+          onClick={()=>setFilter("completed")}
+          >Completed</button>
         </li>
       </ul>
     );
