@@ -6,16 +6,20 @@ import Footer from "./components/Footer"
 import TaskList from "./components/TaskList"
 import TaskFilter from "./components/TaskFilter"
 import InputTask from "./components/InputTask"
+import { use } from "react"
 
 function App() {
   const [tasks, setTask] = useState([]);
   const [filter, setFilter] = useState('all');
+  
+  const uncompleteTaskCount = tasks.filter((task)=>task.status==="active").length;
 
   const filteredTask = tasks.filter((task)=>{
     if(filter === "active") return task.status ==="active";
     if(filter === "completed") return task.status === "completed"
     return true;
   });
+ 
 
   const editTask = (id, newDescription)=>{
     setTask(tasks.map((task)=>{
@@ -86,7 +90,7 @@ function App() {
           </TaskList>
           
 
-          <Footer n={tasks.length}>
+          <Footer n={uncompleteTaskCount}>
             <TaskFilter
             currentFilter = {filter}
             setFilter = {setFilter}
