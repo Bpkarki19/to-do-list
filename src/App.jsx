@@ -1,7 +1,6 @@
 import { useState } from "react"
 import "./App.css"
 import Task from "./components/Task"
-
 import Footer from "./components/Footer"
 import TaskList from "./components/TaskList"
 import TaskFilter from "./components/TaskFilter"
@@ -11,8 +10,14 @@ import { use } from "react"
 function App() {
   const [tasks, setTask] = useState([]);
   const [filter, setFilter] = useState('all');
+  //console.log(tasks);
   
-  const uncompleteTaskCount = tasks.filter((task)=>task.status==="active").length;
+  const deleteCompleted =()=>{
+    const activeTasks = tasks.filter((task)=>task.status==='active');
+    setTask(activeTasks);
+  };
+  
+  const uncompleteTaskCount = (tasks.filter((task)=>task.status==="active")).length;
 
   const filteredTask = tasks.filter((task)=>{
     if(filter === "active") return task.status ==="active";
@@ -21,11 +26,12 @@ function App() {
   });
  
 
-  const editTask = (id, newDescription)=>{
+  const editTask = (id, text)=>{
     setTask(tasks.map((task)=>{
       if (task.id === id){
-        return {...task, description:newDescription};
+        return {...task, description:text};
       }
+      return task;// bug fixed here not returning any thing was causing undefined.
     }))
   }
  
@@ -53,11 +59,11 @@ function App() {
   const addItem = (text) =>{
     //key value pair standard js obj
     const newTask = {
-      //id: Date.now(),
+      
       id: crypto.randomUUID(),
       description: text,
       status: "active",
-      createdTime: 'just now'
+      createdTime: new Date(Date.now()).toString().slice(0,24)//unix timeStamp
 
     };
     //adding new task to existing array
@@ -90,7 +96,10 @@ function App() {
           </TaskList>
           
 
-          <Footer n={uncompleteTaskCount}>
+          <Footer 
+          n={uncompleteTaskCount}
+          clearCompleted = {deleteCompleted}
+          >
             <TaskFilter
             currentFilter = {filter}
             setFilter = {setFilter}

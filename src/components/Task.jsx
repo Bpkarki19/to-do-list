@@ -2,8 +2,10 @@ import { useState } from "react"
 
 function Task({ id,onDelete,onToggle,onEdit, description, status, createdTime }) {
   const isCompleted = status === "completed"
-  const [text, setText] = useState(description)
-  const [isEditing, setIsEditing] = useState(false)
+  const [text, setText] = useState(description);
+  const [isEditing, setIsEditing] = useState(false);
+  console.log('text-->',text);
+  console.log(isEditing);
 
   
   
@@ -17,7 +19,9 @@ function Task({ id,onDelete,onToggle,onEdit, description, status, createdTime })
       onEdit(id,text);
       setIsEditing(false);
       //callin backend part
+      console.log('enter pressed')
     }
+    
   }
 
   
