@@ -10,23 +10,9 @@ import InputTask from "./components/InputTask"
 function App() {
   const [tasks, setTask] = useState([])
   const [filter, setFilter] = useState("all")
-  //console.log(tasks);
+  
 
-  const dateTonow = (createdDate) => {
-    const dateParts = [
-      createdDate.getFullYear(),
-      createdDate.getMonth(),
-      createdDate.getDate(),
-      createdDate.getHours(),
-      createdDate.getMinutes(),
-      createdDate.getSeconds(),
-    ]
-    const displayTime = formatDistanceToNow(
-      new Date(dateParts),{includeSeconds:true}
-    )
-    console.log(displayTime);
-    return displayTime;
-  }
+  
 
   const deleteCompleted = () => {
     const activeTasks = tasks.filter((task) => task.status === "active")
@@ -79,7 +65,7 @@ function App() {
       id: crypto.randomUUID(),
       description: text,
       status: "active",
-      createdTime: new Date()
+      createdTime: new Date() // default time sets current time if not provided
     }
     //adding new task to existing array
     setTask((prevTask) => [...prevTask, newTask])

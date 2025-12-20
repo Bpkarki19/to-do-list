@@ -1,7 +1,16 @@
 import { useState, useEffect } from "react"
 import { formatDistanceToNow} from "date-fns"
 
-function Task({ id,onDelete,onToggle,onEdit, description, status, createdTime }) {
+function Task({ 
+  //default props
+  id,
+  onDelete =()=>{},//Preventing "undefined is not a function" Errors
+  onToggle =()=>{},
+  onEdit =()=>{}, 
+  description = "No description provided", 
+  status = "active", 
+  createdTime = new Date() 
+}) {
   const isCompleted = status === "completed"
   const [text, setText] = useState(description);
   const [isEditing, setIsEditing] = useState(false);
