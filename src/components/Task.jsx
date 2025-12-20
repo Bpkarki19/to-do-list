@@ -1,11 +1,22 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { formatDistanceToNow} from "date-fns"
 
 function Task({ id,onDelete,onToggle,onEdit, description, status, createdTime }) {
   const isCompleted = status === "completed"
   const [text, setText] = useState(description);
   const [isEditing, setIsEditing] = useState(false);
-  console.log('text-->',text);
-  console.log(isEditing);
+  const [timeAgo, setTimeAgo] = useState(formatDistanceToNow(createdTime,{includeSeconds:true, addSuffix:true}))
+
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      setTimeAgo(
+        formatDistanceToNow(createdTime,{includeSeconds:true, addSuffix:true})
+      )
+    },10000)
+    return ()=> clearInterval(interval)
+
+  },[createdTime])
+  
 
   
   
@@ -37,7 +48,7 @@ function Task({ id,onDelete,onToggle,onEdit, description, status, createdTime })
           />
           <label>
             <span className="description">{description}</span>
-            <span className="created">{createdTime}</span>
+            <span className="created">{timeAgo}</span>
           </label>
           <button
             type="button"
