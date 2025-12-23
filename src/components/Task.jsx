@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { formatDistanceToNow} from "date-fns"
+import PropTypes from "prop-types";
 
 function Task({ 
   //default props
@@ -79,5 +80,15 @@ function Task({
         />
     </li>
   )
+}
+
+Task.prototype = {
+  id: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  status: prototype.oneOf(['active','completed']),
+  createdTime: PropTypes.instanceOf(Date),
+  onDelete: PropTypes.func,
+  onToggle: PropTypes.func,
+  onEdit: prototype.func
 }
 export default Task

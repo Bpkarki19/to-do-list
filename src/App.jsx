@@ -11,9 +11,6 @@ function App() {
   const [tasks, setTask] = useState([])
   const [filter, setFilter] = useState("all")
   
-
-  
-
   const deleteCompleted = () => {
     const activeTasks = tasks.filter((task) => task.status === "active")
     setTask(activeTasks)
