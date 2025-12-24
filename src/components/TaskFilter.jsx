@@ -1,4 +1,9 @@
-export default function TaskFilter({currentFilter,setFilter}){
+import PropTypes from "prop-types";
+
+export default function TaskFilter({
+  currentFilter = 'all',
+  setFilter =()=>{}
+}){
     return(
         <ul className="filters">
         <li>
@@ -18,4 +23,9 @@ export default function TaskFilter({currentFilter,setFilter}){
         </li>
       </ul>
     );
+}
+
+TaskFilter.PropTypes = {
+  currentFilter: PropTypes.oneOf(['all','active','completed']),
+  setFilter:PropTypes.func
 }

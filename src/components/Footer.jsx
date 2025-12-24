@@ -1,6 +1,10 @@
+import PropTypes from "prop-types"
 
-
-export default function Footer({n,children, clearCompleted}) {
+export default function Footer({
+  n = 0,
+  children = null, 
+  clearCompleted = ()=>{},
+}) {
   return (
     <footer className="footer">
       <span className="todo-count">
@@ -9,4 +13,10 @@ export default function Footer({n,children, clearCompleted}) {
       <button className="clear-completed" onClick={clearCompleted}>Clear completed</button>
     </footer>
   )
+}
+
+Footer.PropTypes = {
+  n:PropTypes.number,
+  childern:PropTypes.node,
+  clearCompleted:PropTypes.func,
 }

@@ -1,5 +1,6 @@
+import PropTypes from "prop-types"
 import { useState } from "react"
-export default function InputTask({ onItemAdded }) {
+export default function InputTask({ onItemAdded=()=>{} }) {
   const [text, setText] = useState("")
   const onLabelChange = (e) => {
     setText(e.target.value)
@@ -24,4 +25,8 @@ export default function InputTask({ onItemAdded }) {
       />
    
   )
+}
+
+InputTask.PropTypes = {
+    onItemAdded: PropTypes.func
 }

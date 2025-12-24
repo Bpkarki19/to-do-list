@@ -40,7 +40,7 @@ function Task({
       onEdit(id,text);
       setIsEditing(false);
       //callin backend part
-      console.log('enter pressed')
+      
     }
     
   }
@@ -85,10 +85,10 @@ function Task({
 Task.prototype = {
   id: PropTypes.string.isRequired,
   description: PropTypes.string,
-  status: prototype.oneOf(['active','completed']),
+  status: PropTypes.oneOf(['active','completed']),
   createdTime: PropTypes.instanceOf(Date),
   onDelete: PropTypes.func,
   onToggle: PropTypes.func,
-  onEdit: prototype.func
+  onEdit: PropTypes.func
 }
 export default Task
